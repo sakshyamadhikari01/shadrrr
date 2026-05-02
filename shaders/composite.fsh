@@ -17,6 +17,7 @@ const int colortex0Format = RGB16;
 
 uniform vec3 shadowLightPosition;
 uniform mat4 gbufferModelViewInverse;
+uniform vec3 fogColor;
 
 // Added missing uniforms expected by the lighting/shadow math
 uniform mat4 gbufferProjectionInverse;
@@ -96,4 +97,8 @@ void main() {
   vec3 sunlight = sunlightColor * clamp(dot(worldLightVector, normal), 0.0, 1.0) * shadow;
 
   color.rgb *= blocklight + skylight + ambient + sunlight;
+  float dist = length(feetPlayerPos);
+float fogFactor = clamp(exp(-dist * 0.007), 0.0, 1.0);
+color.rgb = mix(fogColor, color.rgb, fogFactor);
+
 }

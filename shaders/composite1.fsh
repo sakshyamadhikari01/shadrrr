@@ -6,7 +6,8 @@ uniform sampler2D depthtex0;
 uniform mat4 gbufferProjectionInverse;
 uniform vec3 fogColor;
 uniform float far;
-
+uniform vec3 fogColor;
+ 
 in vec2 texcoord;
 
 // Fog density/strength. Use float for smooth exponential falloff.
