@@ -9,7 +9,8 @@ uniform float far;
 
 in vec2 texcoord;
 
- const int FOG_DENSITY = 5.0;
+// Fog density/strength. Use float for smooth exponential falloff.
+const float FOG_DENSITY = 5.0;
 
 vec3 projectAndDivide(mat4 projectionMatrix, vec3 position){
   vec4 homPos = projectionMatrix * vec4(position, 1.0);
@@ -32,7 +33,7 @@ void main() {
 
  float dist = length(viewPos) / far;
  float fogFactor = exp(-FOG_DENSITY * (1.0 - dist));
-
+ // Apply two-stage fog: linear blend then exponential tone mapping.
  color.rgb = mix(color.rgb, pow(fogColor, vec3(2.2)), length(viewPos) / far);
  color.rgb = mix(color.rgb, pow(fogColor, vec3(2.2)), clamp(fogFactor, 0.0, 1.0));
 }

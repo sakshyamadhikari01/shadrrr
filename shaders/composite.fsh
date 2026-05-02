@@ -18,6 +18,11 @@ const int colortex0Format = RGB16;
 uniform vec3 shadowLightPosition;
 uniform mat4 gbufferModelViewInverse;
 
+// Added missing uniforms expected by the lighting/shadow math
+uniform mat4 gbufferProjectionInverse;
+uniform mat4 shadowModelView;
+uniform mat4 shadowProjection;
+
 const vec3 blocklightColor = vec3(1.0, 0.5, 0.08);
 const vec3 skylightColor = vec3(0.05, 0.15, 0.3);
 const vec3 sunlightColor = vec3(1.0);
